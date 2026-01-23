@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pannya Metta Sangha - PMS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            background: #f0f4f8;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #2c5f9e 0%, #1e4378 100%);
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+            }
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            padding: 5px;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            font-size: 28px;
+            font-weight: bold;
+            color: white;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+            padding: 8px 16px;
+            border-radius: 8px;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: #64b5f6;
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: #64b5f6;
+            transform: translateY(-2px);
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Introduction/President Section */
+        #introduction {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            padding: 100px 50px;
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #introduction::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(44,95,158,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(30px); }
+        }
+
+        .president-section {
+            flex: 1;
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .president-photo {
+            width: 250px;
+            height: 250px;
+            background: white;
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            border: 5px solid #2c5f9e;
+        }
+
+        .president-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .president-photo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .president-section h2 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            color: #1e4378;
+        }
+
+        .president-section p {
+            font-size: 18px;
+            color: #2c5f9e;
+            font-weight: 600;
+        }
+
+        .general-info {
+            flex: 1.2;
+            position: relative;
+            z-index: 2;
+        }
+
+        .general-info h1 {
+            font-size: 56px;
+            margin-bottom: 25px;
+            color: #1e4378;
+            line-height: 1.2;
+            font-weight: bold;
+        }
+
+        .general-info p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #546e7a;
+            margin-bottom: 30px;
+        }
+
+        /* Initiatives/Topics Section */
+        #initiatives {
+            background: linear-gradient(135deg, #2c5f9e 0%, #1e4378 100%);
+            padding: 120px 50px;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 48px;
+            margin-bottom: 60px;
+            color: white;
+            position: relative;
+            font-weight: bold;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 120px;
+            height: 5px;
+            background: linear-gradient(90deg, #64b5f6 0%, transparent 100%);
+            margin: 20px auto 0;
+            border-radius: 10px;
+        }
+
+        .initiatives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .initiative-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .initiative-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #64b5f6 0%, #2c5f9e 100%);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .initiative-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .initiative-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+
+        .initiative-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .initiative-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .initiative-content {
+            padding: 30px;
+            text-align: center;
+        }
+
+        .initiative-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #1e4378;
+            font-weight: bold;
+        }
+
+        .initiative-card p {
+            font-size: 16px;
+            color: #546e7a;
+            line-height: 1.6;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 50px;
+            border-radius: 25px;
+            max-width: 800px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+            animation: slideDown 0.4s ease;
+            position: relative;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-80px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .close {
+            color: #546e7a;
+            float: right;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            line-height: 1;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .close:hover {
+            color: #d32f2f;
+            transform: rotate(90deg);
+            background: rgba(211, 47, 47, 0.1);
+        }
+
+        .modal-content h2 {
+            color: #1e4378;
+            font-size: 42px;
+            margin-bottom: 30px;
+            font-weight: bold;
+            clear: both;
+        }
+
+        .modal-content p {
+            color: #546e7a;
+            line-height: 1.9;
+            font-size: 17px;
+            margin-bottom: 20px;
+        }
+
+        /* About Section */
+        #about {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            padding: 120px 50px;
+        }
+
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-content h2 {
+            font-size: 48px;
+            margin-bottom: 40px;
+            color: #1e4378;
+            font-weight: bold;
+        }
+
+        .about-content p {
+            font-size: 18px;
+            line-height: 1.9;
+            color: #546e7a;
+            margin-bottom: 25px;
+        }
+
+        /* Contact Section */
+        #contact {
+            background: linear-gradient(135deg, #1e4378 0%, #0d2447 100%);
+            padding: 120px 50px;
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 100px;
+            align-items: center;
+        }
+
+        .contact-logo-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .footer-logo {
+            width: 150px;
+            height: 150px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            overflow: hidden;
+            padding: 15px;
+        }
+
+        .footer-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .contact-logo-section h2 {
+            font-size: 48px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            letter-spacing: 2px;
+        }
+
+        .contact-logo-section p {
+            color: rgba(255,255,255,0.8);
+            font-size: 18px;
+            font-style: italic;
+        }
+
+        .contact-details {
+            display: grid;
+            gap: 25px;
+        }
+
+        .contact-item {
+            background: rgba(255,255,255,0.95);
+            padding: 25px 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            background: white;
+        }
+
+        .contact-item h4 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: #1e4378;
+            font-weight: bold;
+        }
+
+        .contact-item p {
+            font-size: 16px;
+            color: #546e7a;
+            margin-bottom: 5px;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #0d2447 0%, #071829 100%);
+            color: rgba(255,255,255,0.8);
+            padding: 30px 50px;
+            text-align: center;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            #introduction {
+                flex-direction: column;
+                padding: 60px 20px;
+                min-height: auto;
+                text-align: center;
+            }
+
+            .general-info h1 {
+                font-size: 36px;
+            }
+
+            #initiatives {
+                padding: 60px 20px;
+            }
+
+            .initiatives-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            #contact {
+                grid-template-columns: 1fr;
+                padding: 60px 20px;
+                gap: 40px;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .modal-content {
+                margin: 10% 20px;
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-section">
+            <div class="logo">
+                <!-- Replace with your logo image URL -->
+                <img src="pmsimg/logo.png" alt="PMS Logo" onerror="this.parentElement.innerHTML='PMS'">
+            </div>
+            <div class="logo-text">Pannya Metta Sangha</div>
+        </div>
+        
+        <nav>
+            <a onclick="scrollToSection('introduction')">Home</a>
+            <a onclick="scrollToSection('about')">About</a>
+            <a onclick="scrollToSection('contact')">Contact</a>
+        </nav>
+    </header>
+
+    <section id="introduction">
+        <div class="president-section">
+            <div class="president-photo">
+                <!-- Replace with president photo URL -->
+                <img src="pmsimg/name.png" alt="President" onerror="this.parentElement.innerHTML='👤'">
+            </div>
+            <h2>Venerable Sangharatna Manake</h2>
+            <p>President, Pannya Metta Sangha (India)</p>
+        </div>
+        
+        <div class="general-info">
+            <h1>Pannya Metta Sangha</h1>
+            <p>Pannya Metta Sangha (PMS) is a spiritual and social organization dedicated to promoting wisdom, loving-kindness, and community service. Through our various initiatives, we strive to create a harmonious society built on the principles of compassion, understanding, and collective growth.</p>
+            <p>Our mission is to spread the teachings of mindfulness and ethical living while actively engaging in social welfare activities that benefit communities. We welcome all who seek to walk the path of wisdom and compassion.</p>
+        </div>
+    </section>
+
+    <section id="initiatives">
+        <h2 class="section-title">Our Initiatives</h2>
+        <div class="initiatives-grid">
+            <div class="initiative-card" onclick="openModal('modal1')">
+                <div class="initiative-image">
+                    <!-- Replace with Balsadan image URL -->
+                    <img src="pmsimg/maha.png" alt="Mahasamadhi Bhoomi" onerror="this.parentElement.innerHTML='🏛️'">
+                </div>
+                <div class="initiative-content">
+                    <h3>Mahasamadhi Bhoomi</h3>
+                    <p>A sacred ground of profound spiritual significance, maintained as a peaceful sanctuary for meditation and reverence.</p>
+                </div>
+            </div>
+            
+            <div class="initiative-card" onclick="openModal('modal2')">
+                <div class="initiative-image">
+                    <!-- Replace with Youth Camp image URL -->
+                    <img src="pmsimg/prag.png" alt="Pradnyagiri" onerror="this.parentElement.innerHTML='⛺'">
+                </div>
+                <div class="initiative-content">
+                    <h3>Pradnyagiri</h3>
+                    <p>Pradnyagiri is a spiritually significant mountain in India where a majestic 30-ft meditating Buddha statue is established, symbolizing humanity, world peace, harmony, and universal brotherhood.</p>
+                </div>
+            </div>
+            
+            <div class="initiative-card" onclick="openModal('modal3')">
+                <div class="initiative-image">
+                    <!-- Replace with Mahasamadhi Bhoomi image URL -->
+                    <img src="pmsimg/bal.jpg" alt="Pannya Metta Balsadan" onerror="this.parentElement.innerHTML='🕉️'">
+                </div>
+                <div class="initiative-content">
+                    <h3>Pannya Metta Balsadan</h3>
+                    <p>Our foundational center dedicated to nurturing wisdom and compassion through meditation, dharma talks, and community gatherings.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="about-content">
+            <h2>About Our Mission</h2>
+            <p>Pannya Metta Sangha was founded on the principles of wisdom (Pannya) and loving-kindness (Metta), creating a community (Sangha) dedicated to spiritual growth and social service.</p>
+            <p>We believe in the transformative power of mindfulness, compassion, and collective action. Through our various programs and initiatives, we work to create positive change in individuals and communities alike.</p>
+            <p>Our organization welcomes people from all backgrounds to participate in our activities, learn from our teachings, and contribute to building a more compassionate world.</p>
+        </div>
+    </section>
+
+    <!-- Modals -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal1')">&times;</span>
+            <h2>Mahasamadhi Bhoomi</h2>
+            <p>Mahasamadhi Bhumi is a prominent Buddhist spiritual and cultural site situated at Ruyad (Sindhpuri) village near Pauni, in Bhandara district of Maharashtra, India, on the serene banks of the Wainganga River. The site was established on 8 February 1987 with the objective of preserving, promoting, and revitalizing Buddha Dhamma and the values of peace, compassion, and wisdom. Pauni is an ancient town and has been recognized as one of the major centers of Buddhist culture since the time of Emperor Ashoka, a legacy that is still evident today through historical remains and continuing traditions.</p>
+            <p>Spread across approximately 6.5 acres of land, the complex is home to the magnificent Maha Samadhi Bhumi Maha Stupa, a huge and visually striking structure erected on the riverbank. The stupa, inaugurated on 8 February 2007, is regarded as one of the finest contemporary examples of Buddhist architecture and sculpture in the region. Its design and artistic elements depict significant events from the life of the Buddha, offering a spiritual narrative through art and creating an atmosphere of deep reverence and reflection.</p>
+            <p>Since its establishment, Mahasamadhi Bhumi has evolved into an important Buddhist pilgrimage destination in central India. Thousands of monks, devotees, and visitors from India and abroad visit the site every year, especially during Dhamma Mahotsav and on Poornima (full moon) and Amavasya (new moon) days. These gatherings involve meditation, prayer, and Dhamma-related activities, reinforcing the site’s role as a living center of Buddhist practice and cultural heritage.</p>
+        </div>
+    </div>
+
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal2')">&times;</span>
+            <h2>Pradnyagiri</h2>
+            <p>Tathagat Buddha means the symbol of humanity. With a prayer for World peace, which includes peace for mankind and peace for all of nature. Buddha dhamma has taught that there should be moral and mutual brotherhood among the human beings and they should dwell peacefully. In token of this, on stage of 30 ft., a huge Buddha statue of 30 ft. in dhyana is established on the Pradnyagiri mountain (200 meter above sea level) in Dongargarh region of Rajnandgaon district (Chhattisgarh State), which also communicates the message of World peace and brotherhood.</p>
+            <p>An International Buddhist Conference is convened on 6th of February 2017. In which apart from India, from Japan, Thailand, Srilanka, Tibet, Korea, Taiwan and Buddhist nations the Hon’ble Dhammaguru, upasaka – upasika & followers self inspired participate and extend the message of World peace and brotherhood. About over 5 lacs of people come here to pay homage.</p>
+            <p>The idol of Tathagat Buddha in meditation situated on Pradnyagiri attracts the attention of every one at a distance even. The progress works are speedily in the run up to the health camp, Pannya Metta Sangha approached Dr. Mahatme Eye Hospital on Ramdaspeth Road, Nagpur to participate in an eye camp for the benefit of villagers of Pahela, Pauni, Dist. Bhandara. On receiving confirmation from the hospital, Pannya Metta Sangha with their volunteers made necessary arrangements as per requirement from Dr. Mahatme & his team.</p>
+            <p>One-day eye camp organized at Pahela, Dist. Bhandara for villagers & poor people was a success. More than 200 villagers, who had never had an eye check up done before and some hadn’t had a check up done for 10–20 years. Given the hazardous nature of the work the villagers/farmers are engaged in and that health services are usually inaccessible to them, there was a need for such a camp to provide basic health services.
+Details of specialists from Dr. Mahatme’s Eye Hospital, Nagpur who kindly volunteered to contribute towards achieving the above objective at the eye camp are as follows:
+2 Optometrist, 1 Ophthalmologist, 1 Counselor and 1 Camp Coordinator.
+</p>
+            <p>The Camp started at 11.30 in morning and ended at 5.30 pm. Around 200 villagers/farmers were benefited by this camp. The doctors checked for eye infections, defect in vision, etc. As per information received from the hospital, following is the break up of the diagnosis:<p>
+            <p>Operation (Eye surgery) – 36<p>
+            <p>Spect’s – 48<p>
+            <p>Hospital Referred – 32<p>
+            <p>Medicine – 15<p>
+            </p>
+            <p>Attendees with eye problems requiring continued medical attention were given slips that they could present at Dr. Mahatme Eye Hospital for free medical treatment. On 25th Feb 2017, 36 operations (Eye surgery) were carried out at Mahatme Eye Hospital, Nagpur. Pannya Metta Sangha made necessary pickup arrangement of patients from Pahela, Dist. Bhandara to Nagpur and arrange their food and other requirements at Nagpur till they get discharged.</p>
+        </div>
+    </div>
+
+    <div id="modal3" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal3')">&times;</span>
+            <h2>Pannya Metta Balsadan</h2>
+            <p>Pannya Metta Balsadan is dedicated to provide a stable, loving family atmosphere. To support orphan children who are unable to live on their own until they become self-sufficient, to provide them with all education and prepare them for life with compassion of family. It is located at Sindhpuri, Pauni, Dist. Bhandara (95 kms. from Nagpur), Maharashtra, India, in associations self-owned premises. Balsadan is established on a land of 9 acres very close to Mahasamadhi Bhoomi, in the year 1995, on February, 8th. Which is well equipped with all facilities. Association provides food, healthcare, educational material & fulfill their all necessity requirements of orphans on priority.
+The work started in this Balsadan comprising of 16 Halls. Initially, there were only 7 childrens and now it is 32, of which 14 are boys and 18 girls. Only the orphans, facing poor conditions, having no parents and neglected by the society are given shelter in balsadan, irrespective of castes, creeds and religions. Not only these children are educated, but also they are growth-wise and culture-wise sculptured here. Two Superintendents, two teachers for educating, a music teacher, assistant, cook, watchman etc. are among the others seen there.
+The social, cultural and thought provoking programs are regularly conducted over there. Children performing on stage on 8th Feb 2017 on occasion of Pannya Metta Balsadan’s Anniversary. The children over there feel just at home. Benefit of Organization every year cloths & bedding material are donated to this Balsadan by Pannya Metta Sangha.</p>
+            <p>All the children are doing their education in a reputed Primary, Middle/ High school & Colleges and have the opportunity to take part in activities, such as dancing, singing and sports etc. Those children are weak in their studies, special attention are paid towards them by personal instructor at Balsadan, while others all are studying well, getting good marks and ranks in their classes. In daily schedule children wake-up in morning at 6 am finish their morning activity and in discipline manner they pray, after that they do their study. Two teachers are engaged with association to give personal teaching to the students every morning for two hours at Balsadan.</p>
+            <p>Every month children birthday celebrated at the end of every month. On this occasion sweets and special food give to the children. Children decorate the balsadan and enjoy the program and fill like home.
+In parallel to their educational development various tours and picnic are arranged for their development. One of the special events in the year 2016 – 2017 Goa tour is organized by Association in the Guidance of Rev. Sangharatna Manake in the leadership of Mr. Pradnyanand Kawade & Ms. Karuna Tembhurne. The journey began by Bus on 21st March 2016 from Nagpur Head office situated at Lashkaribag. Approx. 4800 km. distance is covered and in the journey places Nanded, Latur, Solapur, Sangli, Kolhapur are seen by the children. This is the first outdoor picnic for the children and they learned & enjoyed lot in sight sin and beaches of Goa.</p>
+            <p>Doctors instructed guidelines and precaution necessary taken of camp. Mr. Kawade and provide for further care to be taken of children. At the end of camp Sheelratna (Secretary-PMS) presented a memento to Dr. Mala Kamble (Eye Specialist), Dr. Prasanna Borkar (General Physician) & their members as a token of thanks for their time & efforts.</p>
+            <p>A health check-up camp was conducted on 19th September 2016 for children of Balsadan. A general health check-up camp was carried out to facilitate early detection of deficiencies and general health of children. 32 Children were diagnosed in the camp. Common problems included worms, vitamin deficiency, calcium deficiency, fever, cold and cough, tonsillitis, headache, dental, eyes and ears related and diarrhea. There were four severe cases with symptoms of jaundice, eye infection and wound infection. These children for referral check-up by specialists for further treatment.</p>
+        </div>
+    </div>
+
+    <section id="contact">
+        <div class="contact-logo-section">
+            <div class="footer-logo">
+                <!-- Replace with your logo image URL -->
+                <img src="pmsimg/logo.png" alt="PMS Logo" onerror="this.parentElement.innerHTML='PMS'">
+            </div>
+            <h2>Pannya Metta Sangha</h2>
+            <p>Wisdom • Compassion • Community</p>
+        </div>
+        
+        <div class="contact-details">
+            <div class="contact-item">
+                <h4>📧 Email</h4>
+                <p>pannyamettasangha1982@gmail.com</p>
+
+            </div>
+            <div class="contact-item">
+                <h4>📞 Phone</h4>
+                <p>+91 9766186214</p>
+                
+            </div>
+            <div class="contact-item">
+                <h4>📍 Address</h4>
+                <p>Regd. Number. MAH 586/82, F-3849(NAG
+Head Office: Buddha Nag Vihara, Cr. No. 15/21,
+Hardasnagar, (Lashkaribagh)</p>
+                <p>Nagpur, Maharashtra, India</p>
+            </div>
+            
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Pannya Metta Sangha. All rights reserved. | Spreading wisdom and compassion.</p>
+    </footer>
+
+    <script>
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal').forEach(modal => {
+                    modal.style.display = 'none';
+                });
+                document.body.style.overflow = 'auto';
+            }
+        });
+    </script>
+</body>
+</html>
